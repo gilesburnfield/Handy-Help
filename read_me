@@ -1,0 +1,73 @@
+## SDS
+
+Tool for handyman type jobs. WHich stores information on pass jobs, and caclulates bassic sats. 
+
+For a given 'Date' and 'client', hours , rate and Notes are recorded. 
+Stats are calcual
+
+ Calculates basics stats, including total hours worked, Bill total
+
+
+
+
+
+
+
+Done 
+
+generate dictanry
+inport out port it txt file
+convert back to dictainary 
+
+
+To do
+
+input dict into stas function
+
+stats for all clients
+Extras
+input cleaning
+email output
+Save back up
+if paid
+make phone app ok kivvy
+
+
+
+
+# In put inforformation
+	python prompt
+	 ask for hours, append to exsiting dictainary
+
+
+#save dicionarys as txt files
+
+Bug
+
+Input with string with out quoations
+if error or miss quote re ask question.
+
+
+
+
+
+Structure
+
+client
+
+	Labour
+		Hours
+		Fee rate
+
+	Labour total
+
+
+	Extras
+		Extra one
+			Cost
+		Extra two cost
+
+	Extra total
+
+
+

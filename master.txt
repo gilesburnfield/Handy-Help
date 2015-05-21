@@ -1,0 +1,1 @@
+{'giles': {'15th of july': {'hours': 9, 'rate': 8, 'Notes': 'lashed'}, '21st July': {'hours': 9.0, 'rate': 15.0, 'Notes': 'lashed'}}, "'Giles'": {}, 'tom': {'12 july': {'hours': 8, 'rate': 9, 'Notes': 'lash'}, '15th': {'hours': 8, 'rate': 16, 'Notes': 'mow'}}, 'Giles': {}}
