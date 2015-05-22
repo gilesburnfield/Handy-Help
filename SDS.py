@@ -46,6 +46,8 @@ def list_jobs():
         
 def stats(client):
     a = read()
+
+    job_list =[]
     
     hours = []
     rate = []
@@ -55,12 +57,12 @@ def stats(client):
     wage_total = 0
 
 
-
     if client == 'total':
         job_list = list_jobs()
-        
 
-    print job_list
+    job_list.append(client) 
+
+    print job_list  
 
     for j in job_list:
 
