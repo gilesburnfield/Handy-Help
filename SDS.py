@@ -1,41 +1,43 @@
 #SDS.py
 
+import os
+import sys
+
+def resource_path(relative):
+    return os.path.join(
+        os.environ.get(
+            "sys._MEIPASS",
+            os.path.abspath(".")
+        ),
+        relative
+    )
+
+def create_db(filename):
+    filename = resource_path(filename)
+    template = '{}'
+    master = open(filename, 'wb')
+    master.write (template)
+    master.close()
+
 def read():
-    master = open("master.txt", "r")
+    filename = resource_path('master.txt')
+    master = open(filename, 'r')
     master_dict = eval(master.read())
     return master_dict
 
 def write(stro):
-    master = open("master.txt", "wb")
+    filename = resource_path('master.txt')
+    master = open(filename, 'wb')
     master.write (stro)
     master.close()
-print read 
-
-
-def new_job():
-    master_dict = read()
-    job = raw_input('Job:')
-    master_dict[job] = {}
-    master_str = str(master_dict)
-    write(master_str)
-
-
-def job_update(job):
-    master_dict =read()
-    date = raw_input("Date please: ")
-    hours= float(raw_input("Hours please: "))
-    rate= float(raw_input("Rate please: "))
-    notes = str(raw_input("What did you do: "))
     
-    master_dict[job][date] = {}
-    master_dict[job][date]['hours'] = hours
-    master_dict[job][date]['rate'] = rate
-    master_dict[job][date]['Notes'] = notes
-        
-    master_str = str(master_dict)
-    write(master_str)
-    return master_dict
-
+def new_job():
+    job = raw_input('Job: ')
+    if not job in list_jobs():
+        master_dict = read()
+        master_dict[job] = {}
+        master_str = str(master_dict)
+        write(master_str)
 
 def list_jobs():
     list_jobs = []
@@ -43,6 +45,25 @@ def list_jobs():
     for jobs in master_dict:
         list_jobs.append(jobs)
     return list_jobs
+
+
+def job_update(job):    
+    if job in list_jobs():
+        master_dict =read()
+        date = raw_input("Date please: ")
+        hours= float(raw_input("Hours please: "))
+        rate= float(raw_input("Rate please: "))
+        notes = raw_input("What did you do: ")
+    
+        master_dict[job][date] = {}
+        master_dict[job][date]['hours'] = hours
+        master_dict[job][date]['rate'] = rate
+        master_dict[job][date]['notes'] = notes
+        
+        master_str = str(master_dict)
+        write(master_str)
+        return master_dict
+    print 'No Job'
         
 def stats(client):
     a = read()
@@ -111,15 +132,14 @@ def dowhat():
         print 'Anymore?(y/n)'
         ask = raw_input("Anymore: ")
 
+
+
+
+
+
+
+
 dowhat()
-
-
-
-
-
-
-
-
 
 
 
