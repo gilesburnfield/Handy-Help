@@ -62,21 +62,28 @@ if error or miss quote re ask question.
 
 Structure
 
+
+{ Client:{ labour:{ Date1{},Date2{} }, Material{ brought1{},brought2{} } } }
+
 client
-
 	Labour
-		Hours
-		Fee rate
+		Date
+			Hours
+			rate
+			etc
 
-	Labour total
-
-
-	Extras
-		Extra one
+	Materials
+		What
 			Cost
-		Extra two cost
+			Description
+			etc
 
-	Extra total
+
+As application
+
+	Compiled useing py installer..
+
+	
 
 
 
