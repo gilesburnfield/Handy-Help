@@ -20,13 +20,13 @@ def create_db(filename):
     master.close()
 
 def read():
-    filename = resource_path('master.txt')
+    filename = resource_path('giles11.txt')
     master = open(filename, 'r')
     master_dict = eval(master.read())
     return master_dict
 
 def write(stro):
-    filename = resource_path('master.txt')
+    filename = resource_path('giles11.txt')
     master = open(filename, 'wb')
     master.write (stro)
     master.close()
@@ -46,6 +46,13 @@ def list_jobs():
         list_jobs.append(jobs)
     return list_jobs
 
+def list_materials():
+    list_materials = []
+    master_dict = read()
+    for material in master_dict:
+        list_materials.append(material)
+    return
+
 
 def job_update(job):    
     if job in list_jobs():
@@ -64,32 +71,46 @@ def job_update(job):
         write(master_str)
         return master_dict
     print 'No Job'
-        
+
+
+def matrials_update(job):
+    master_dict = read()
+    print master_dict
+    matrials = raw_input('What did you buy? ')
+    cost = float(raw_input('Cost of '+ matrials +': '))
+    description = raw_input('description: ')
+    
+    master_dict[job][matrials] = {}
+    master_dict[job][matrials]['Cost'] = cost
+    master_dict[job][matrials]['description'] = description
+    
+    master_str = str(master_dict)
+    write(master_str)
+    return master_dict
+    
 def stats(client):
     a = read()
 
     job_list =[]
-    
+    material_list =[]
     hours = []
     rate = []
     wage =[]
+    material = []
+    
     hours_total = 0 
     rate_total = 0 
     wage_total = 0
+    material_total = 0
 
 
     if client == 'total':
         job_list = list_jobs()
-
     job_list.append(client) 
-
-    print job_list  
-
     for j in job_list:
-
         print j
-
         for i in a[j]:
+            print i 
             r = a[j][i]['rate']
             h = a[j][i]['hours']
             w = r*h
@@ -98,12 +119,25 @@ def stats(client):
             wage.append(w)
             hours_total = h + hours_total
             rate_total = r + rate_total
-            wage_total = w + wage_total    
+            wage_total = w + wage_total 
+
+
+    #if client == 'total':
+    #    materials_list = list_materials()
+    #material_list.append(client)
+    #for l in material_list:
+    #    for m in a[l]:
+    #        em = a[l][m]['Cost']
+    #        material.append(m)
+    #        material_total = em + material_total
 
 
 
+    
     print 'Client - ' , client
-    print 'Total hours -',hours_total
+    print 'Total hours - ',hours_total
+    print 'Material - ',  material_total
+
     print 'Total Bill -', wage_total
 
 
@@ -111,19 +145,21 @@ def dowhat():
     ask = 'y'
     
     while ask == 'y':
-        print 'Add New Job (N) or Update Exsting Job (U) or Look at Stats(S) or look at Job List (L)'
+        print 'Add New Job (N) or Update Exsting Job (U) or Update extras (M) or Look at Stats(S) or look at Job List (L)'
         
         Choice = raw_input("Sooo: ")
 
         if Choice == 'N':
             new_job()
         elif Choice == 'U':
-            job = raw_input("Which job to update: ")
+            job = raw_input("Which job to update? ")
             job_update(job)
         elif Choice == 'S':
-            job = raw_input("Which Job: ")
+            job = raw_input("Which Job? ")
             stats(job)
-        
+        elif Choice == 'M':
+            job = raw_input("Which Job did you buy matrials for? ")
+            matrials_update(job)
         elif Choice == 'L':
             print 'test'
             print list_jobs()
@@ -133,13 +169,15 @@ def dowhat():
         ask = raw_input("Anymore: ")
 
 
-
-
-
-
-
+print resource_path('giles11.txt')
 
 dowhat()
+
+
+
+
+
+
 
 
 
